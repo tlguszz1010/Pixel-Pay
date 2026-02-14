@@ -1,12 +1,17 @@
 import Database from "better-sqlite3";
+import fs from "fs";
 import path from "path";
 
-const DB_PATH = path.join(__dirname, "../../storage/seller.db");
+const STORAGE_DIR = path.join(__dirname, "../../storage");
+const DB_PATH = path.join(STORAGE_DIR, "seller.db");
 
 let db: Database.Database;
 
 export function getDb(): Database.Database {
   if (!db) {
+    if (!fs.existsSync(STORAGE_DIR)) {
+      fs.mkdirSync(STORAGE_DIR, { recursive: true });
+    }
     db = new Database(DB_PATH);
     db.pragma("journal_mode = WAL");
     initTables(db);
