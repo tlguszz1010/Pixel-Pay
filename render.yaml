@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: pixelpay-seller
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4001"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SELLER_MNEMONIC
+        sync: false
+      - key: PAY_TO
+        sync: false
+      - key: PXPAY_TOKEN_ADDRESS
+        sync: false
+      - key: NFT_CONTRACT_ADDRESS
+        sync: false
+
+  - type: web
+    name: pixelpay-buyer
+    runtime: node
+    plan: free
+    rootDir: packages/buyer-agent
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "4002"
+      - key: SELLER_URL
+        sync: false
+      - key: BUYER_PRIVATE_KEY
+        sync: false

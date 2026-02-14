@@ -6,6 +6,14 @@ import { getSetting } from "../db/queries";
  * Supports both privateKey and mnemonic.
  */
 export function getAccount() {
+  // Check env vars first (for cloud deployment with ephemeral DB)
+  const envKey = process.env.BUYER_PRIVATE_KEY;
+  if (envKey) {
+    return privateKeyToAccount(
+      envKey.startsWith("0x") ? (envKey as `0x${string}`) : (`0x${envKey}` as `0x${string}`)
+    );
+  }
+
   const mnemonic = getSetting("mnemonic");
   if (mnemonic) {
     return mnemonicToAccount(mnemonic);
@@ -24,7 +32,7 @@ export function getAccount() {
 }
 
 export function isWalletConfigured(): boolean {
-  return !!(getSetting("privateKey") || getSetting("mnemonic"));
+  return !!(process.env.BUYER_PRIVATE_KEY || getSetting("privateKey") || getSetting("mnemonic"));
 }
 
 export function getWalletAddress(): string | null {

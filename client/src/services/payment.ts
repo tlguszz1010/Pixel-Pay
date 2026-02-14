@@ -27,7 +27,7 @@ export async function executePaymentRequest(
   const payFetch = wrapFetchWithPaymentFromConfig(fetch, {
     schemes: [
       {
-        network: "eip155:10143", // Monad Testnet
+        network: "eip155:143", // Monad
         client: evmScheme,
       },
     ],

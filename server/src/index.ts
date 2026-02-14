@@ -37,8 +37,8 @@ const facilitatorClient = new HTTPFacilitatorClient({
   url: "https://x402-facilitator.molandak.org",
 });
 
-const MONAD_NETWORK = "eip155:10143";
-const MONAD_USDC = "0x534b2f3A21130d7a60830c2Df862319e593943A3";
+const MONAD_NETWORK = "eip155:143";
+const MONAD_USDC = "0x754704Bc059F8C67012fEd69BC8a327a5aafb603";
 
 const monadScheme = new ExactEvmScheme();
 monadScheme.registerMoneyParser(async (amount: number, network: string) => {
@@ -184,7 +184,7 @@ app.get("/api/nft/:tokenId", (req, res) => {
     name: `PixelPay #${tokenId}`,
     description: "AI-generated image purchased via x402 agent-to-agent economy",
     image: image.image_url,
-    external_url: `https://testnet.monadexplorer.com/tx/${nft.tx_hash}`,
+    external_url: `https://monadscan.com/tx/${nft.tx_hash}`,
     attributes: [
       { trait_type: "Prompt", value: image.prompt },
       { trait_type: "Price", value: `${image.price} USDC` },

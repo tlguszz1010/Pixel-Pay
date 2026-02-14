@@ -70,7 +70,7 @@ async function deploy() {
   const contractAddress = receipt.contractAddress!;
 
   console.log(`Contract deployed at: ${contractAddress}`);
-  console.log(`Explorer: https://testnet.monadexplorer.com/address/${contractAddress}`);
+  console.log(`Explorer: https://monadscan.com/address/${contractAddress}`);
 
   // Save to DB settings
   setSetting("nft_contract_address", contractAddress);

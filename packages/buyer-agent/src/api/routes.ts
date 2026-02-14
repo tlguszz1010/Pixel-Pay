@@ -13,14 +13,15 @@ import {
 import { getWalletAddress, isWalletConfigured } from "../buyer/wallet";
 import { runPipeline } from "../buyer/pipeline";
 
-const monadTestnet = defineChain({
-  id: 10143,
-  name: "Monad Testnet",
+const monadMainnet = defineChain({
+  id: 143,
+  name: "Monad",
   nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
-  rpcUrls: { default: { http: ["https://testnet-rpc.monad.xyz"] } },
+  rpcUrls: { default: { http: ["https://rpc.monad.xyz"] } },
+  blockExplorers: { default: { name: "Monadscan", url: "https://monadscan.com" } },
 });
 
-const USDC_ADDRESS = "0x534b2f3A21130d7a60830c2Df862319e593943A3" as const;
+const USDC_ADDRESS = "0x754704Bc059F8C67012fEd69BC8a327a5aafb603" as const;
 const SELLER_URL = process.env.SELLER_URL || "http://localhost:4001";
 
 const ERC20_ABI = [
@@ -28,7 +29,7 @@ const ERC20_ABI = [
   { inputs: [], name: "decimals", outputs: [{ name: "", type: "uint8" }], stateMutability: "view", type: "function" },
 ] as const;
 
-const balanceClient = createPublicClient({ chain: monadTestnet, transport: http() });
+const balanceClient = createPublicClient({ chain: monadMainnet, transport: http() });
 
 const router = Router();
 

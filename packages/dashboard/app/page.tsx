@@ -337,7 +337,7 @@ export default function DashboardPage() {
                 <div style={{ fontSize: 13, color: "#888", marginBottom: 8 }}>
                   Wallet:{" "}
                   <a
-                    href={`https://testnet.monadexplorer.com/address/${sellerWallet.address}`}
+                    href={`https://monadscan.com/address/${sellerWallet.address}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "#60a5fa", textDecoration: "none" }}
@@ -423,7 +423,7 @@ export default function DashboardPage() {
                 <div style={{ fontSize: 13, color: "#888", marginBottom: 8 }}>
                   Wallet:{" "}
                   <a
-                    href={`https://testnet.monadexplorer.com/address/${buyerWalletInfo.address}`}
+                    href={`https://monadscan.com/address/${buyerWalletInfo.address}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ color: "#60a5fa", textDecoration: "none" }}
@@ -520,7 +520,7 @@ export default function DashboardPage() {
               $PXPAY Token
             </h2>
             <a
-              href={`https://testnet.nad.fun/token/${tokenStats.address}`}
+              href={`https://nad.fun/token/${tokenStats.address}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -637,7 +637,7 @@ export default function DashboardPage() {
                           <a
                             href={
                               item.tokenReward.txHash
-                                ? `https://testnet.monadexplorer.com/tx/${item.tokenReward.txHash}`
+                                ? `https://monadscan.com/tx/${item.tokenReward.txHash}`
                                 : "#"
                             }
                             target="_blank"
@@ -657,7 +657,7 @@ export default function DashboardPage() {
                         )}
                       {item.nft && (
                         <a
-                          href={`https://testnet.monadexplorer.com/tx/${item.nft.txHash}`}
+                          href={`https://monadscan.com/tx/${item.nft.txHash}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{

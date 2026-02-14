@@ -14,7 +14,7 @@ async function deployToken() {
   const existing = getSetting("pxpay_token_address");
   if (existing) {
     console.log(`PXPAY token already deployed at: ${existing}`);
-    console.log(`nad.fun: https://testnet.nad.fun/token/${existing}`);
+    console.log(`nad.fun: https://nad.fun/token/${existing}`);
     console.log("Delete 'pxpay_token_address' from settings to redeploy.");
     return;
   }
@@ -69,9 +69,9 @@ async function deployToken() {
   // Initialize nad.fun SDK
   console.log("Initializing nad.fun SDK...");
   const nadSDK = initSDK({
-    rpcUrl: "https://testnet-rpc.monad.xyz",
+    rpcUrl: "https://rpc.monad.xyz",
     privateKey,
-    network: "testnet",
+    network: "mainnet",
   });
 
   // Get deploy fee
@@ -121,9 +121,9 @@ async function deployToken() {
   console.log(`  Pool Address: ${result.poolAddress}`);
   console.log(`  TX Hash: ${result.transactionHash}`);
   console.log(
-    `  Explorer: https://testnet.monadexplorer.com/address/${tokenAddress}`
+    `  Explorer: https://monadscan.com/address/${tokenAddress}`
   );
-  console.log(`  nad.fun: https://testnet.nad.fun/token/${tokenAddress}`);
+  console.log(`  nad.fun: https://nad.fun/token/${tokenAddress}`);
 
   // Save to DB settings
   setSetting("pxpay_token_address", tokenAddress);

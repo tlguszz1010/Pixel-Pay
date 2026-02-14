@@ -5,7 +5,7 @@ import path from "path";
 import { getAccount } from "./wallet";
 
 const SELLER_URL = process.env.SELLER_URL || "http://localhost:4001";
-const MONAD_NETWORK = "eip155:10143";
+const MONAD_NETWORK = "eip155:143";
 const STORAGE_DIR = path.join(__dirname, "../../storage/purchases");
 
 function getPayFetch() {

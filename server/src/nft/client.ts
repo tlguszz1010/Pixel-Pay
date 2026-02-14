@@ -9,20 +9,23 @@ import { privateKeyToAccount, mnemonicToAccount } from "viem/accounts";
 import { getSetting } from "../db/queries";
 
 // ── Monad Testnet chain definition ─────────────────────
-export const monadTestnet = defineChain({
-  id: 10143,
-  name: "Monad Testnet",
+export const monadMainnet = defineChain({
+  id: 143,
+  name: "Monad",
   nativeCurrency: { name: "MON", symbol: "MON", decimals: 18 },
   rpcUrls: {
-    default: { http: ["https://testnet-rpc.monad.xyz"] },
+    default: { http: ["https://rpc.monad.xyz"] },
   },
   blockExplorers: {
     default: {
-      name: "Monad Explorer",
-      url: "https://testnet.monadexplorer.com",
+      name: "Monadscan",
+      url: "https://monadscan.com",
     },
   },
 });
+
+// Backward compat alias
+export const monadTestnet = monadMainnet;
 
 // ── ABI (mint function + read functions) ───────────────
 export const PIXELPAY_NFT_ABI = [
@@ -83,7 +86,7 @@ function getSellerAccount() {
 }
 
 function getContractAddress(): `0x${string}` {
-  const addr = getSetting("nft_contract_address");
+  const addr = process.env.NFT_CONTRACT_ADDRESS || getSetting("nft_contract_address");
   if (!addr) throw new Error("NFT contract not deployed. Run deploy.ts first.");
   return addr as `0x${string}`;
 }

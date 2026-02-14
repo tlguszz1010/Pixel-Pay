@@ -61,14 +61,14 @@ function getSellerAccount() {
 }
 
 function getTokenAddress(): `0x${string}` {
-  const addr = getSetting("pxpay_token_address");
+  const addr = process.env.PXPAY_TOKEN_ADDRESS || getSetting("pxpay_token_address");
   if (!addr)
     throw new Error("PXPAY token not deployed. Run token:deploy first.");
   return addr as `0x${string}`;
 }
 
 function getRewardAmount(): string {
-  return getSetting("pxpay_reward_per_purchase") || "100";
+  return process.env.PXPAY_REWARD_PER_PURCHASE || getSetting("pxpay_reward_per_purchase") || "100";
 }
 
 // ── Transfer PXPAY (with 5% creator hold check) ─────────
