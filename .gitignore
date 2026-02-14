@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.next/
+.env
+*.db
+storage/
+.expo/
+server/src/nft/compiled.json
+server/src/token/token-image.png

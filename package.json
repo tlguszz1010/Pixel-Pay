@@ -1,0 +1,20 @@
+{
+  "name": "pixel-pay",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "packages/buyer-agent",
+    "packages/dashboard"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev -w server",
+    "dev:buyer": "npm run dev -w packages/buyer-agent",
+    "dev:dashboard": "npm run dev -w packages/dashboard",
+    "dev:all": "npm run dev:server & npm run dev:buyer & npm run dev:dashboard",
+    "build:server": "npm run build -w server",
+    "build:buyer": "npm run build -w packages/buyer-agent",
+    "build:dashboard": "npm run build -w packages/dashboard"
+  }
+}
