@@ -1,0 +1,43 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test:402": "ts-node src/test-client.ts",
+    "nft:compile": "ts-node src/nft/compile.ts",
+    "nft:deploy": "ts-node src/nft/deploy.ts",
+    "token:deploy": "ts-node src/token/deploy-token.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@nadfun/sdk": "^0.4.3",
+    "@x402/core": "^2.3.0",
+    "@x402/evm": "^2.3.0",
+    "@x402/express": "^2.3.0",
+    "@x402/fetch": "^2.3.0",
+    "better-sqlite3": "^12.6.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "node-cron": "^4.0.5",
+    "openai": "^6.17.0",
+    "viem": "^2.45.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.2.0",
+    "@types/node-cron": "^3.0.11",
+    "nodemon": "^3.1.11",
+    "solc": "^0.8.33",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
