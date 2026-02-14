@@ -77,6 +77,21 @@ app.use(express.json());
 app.use(paymentMiddleware(routeConfig, resourceServer));
 
 // ── Free routes ─────────────────────────────────────────
+app.get("/", (_req, res) => {
+  res.json({
+    name: "PixelPay Seller Agent",
+    description: "Autonomous AI art economy powered by x402 micropayments on Monad",
+    endpoints: {
+      "POST /generate": "$0.01 USDC — Generate AI image (x402)",
+      "GET /api/gallery": "Free — Browse gallery",
+      "GET /api/gallery/buy?id=X": "$0.01 USDC — Purchase image (x402)",
+      "GET /api/status": "Free — Revenue stats",
+      "GET /api/token-stats": "Free — $PXPAY token info",
+      "GET /health": "Free — Health check",
+    },
+  });
+});
+
 app.get("/health", (_req, res) => {
   res.json({ status: "ok", agent: "seller" });
 });
