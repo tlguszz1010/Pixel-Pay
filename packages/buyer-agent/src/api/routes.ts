@@ -21,7 +21,7 @@ const monadTestnet = defineChain({
 });
 
 const USDC_ADDRESS = "0x534b2f3A21130d7a60830c2Df862319e593943A3" as const;
-const PXPAY_ADDRESS = getSetting("pxpay_token_address") as `0x${string}` | undefined;
+const SELLER_URL = process.env.SELLER_URL || "http://localhost:4001";
 
 const ERC20_ABI = [
   { inputs: [{ name: "account", type: "address" }], name: "balanceOf", outputs: [{ name: "", type: "uint256" }], stateMutability: "view", type: "function" },
@@ -78,15 +78,18 @@ router.get("/wallet-info", async (_req: Request, res: Response) => {
     ]);
 
     let pxpayBalance = "0";
-    if (PXPAY_ADDRESS) {
-      try {
+    try {
+      const tsRes = await fetch(`${SELLER_URL}/api/token-stats`);
+      const tsData = await tsRes.json() as { deployed?: boolean; address?: string };
+      if (tsData.deployed && tsData.address) {
+        const pxpayAddr = tsData.address as `0x${string}`;
         const [raw, decimals] = await Promise.all([
-          balanceClient.readContract({ address: PXPAY_ADDRESS, abi: ERC20_ABI, functionName: "balanceOf", args: [address as `0x${string}`] }),
-          balanceClient.readContract({ address: PXPAY_ADDRESS, abi: ERC20_ABI, functionName: "decimals" }),
+          balanceClient.readContract({ address: pxpayAddr, abi: ERC20_ABI, functionName: "balanceOf", args: [address as `0x${string}`] }),
+          balanceClient.readContract({ address: pxpayAddr, abi: ERC20_ABI, functionName: "decimals" }),
         ]);
         pxpayBalance = formatUnits(raw, decimals);
-      } catch {}
-    }
+      }
+    } catch {}
 
     res.json({
       configured: true,

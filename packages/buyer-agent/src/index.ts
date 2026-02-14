@@ -19,8 +19,8 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", agent: "buyer" });
 });
 
-// ── Cron: run purchase pipeline every 10 minutes ────────
-cron.schedule("*/10 * * * *", async () => {
+// ── Cron: run purchase pipeline every 5 minutes ─────────
+cron.schedule("*/5 * * * *", async () => {
   console.log("[cron] Starting purchase pipeline...");
   try {
     const result = await runPipeline();
@@ -33,10 +33,11 @@ cron.schedule("*/10 * * * *", async () => {
 
 app.listen(PORT, () => {
   console.log(`Buyer Agent running on http://localhost:${PORT}`);
-  console.log("  Cron: every 10 minutes");
+  console.log("  Cron: every 5 minutes");
+  console.log("  First purchase: after 2 min delay");
   console.log("  API: /api/status, /api/purchases, /api/wallet, /api/trigger");
 
-  // Run pipeline once on startup (after short delay)
+  // Run pipeline once on startup (2 min delay to let gallery build up)
   setTimeout(async () => {
     console.log("[startup] Running initial pipeline...");
     addLog("system", "Buyer Agent started");
@@ -47,5 +48,5 @@ app.listen(PORT, () => {
       const msg = e instanceof Error ? e.message : "Unknown error";
       console.log("[startup] Pipeline skipped:", msg);
     }
-  }, 3000);
+  }, 120_000);
 });
