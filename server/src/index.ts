@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import cron from "node-cron";
 import { paymentMiddleware, x402ResourceServer } from "@x402/express";
 import { HTTPFacilitatorClient } from "@x402/core/server";
 import { ExactEvmScheme } from "@x402/evm/exact/server";
@@ -290,24 +289,19 @@ function autoGenerate() {
   console.log(`[auto] Generated: "${prompt}" (${id})`);
 }
 
-// ── Cron: auto-generate every 15 minutes ────────────────
-cron.schedule("*/15 * * * *", () => {
-  console.log("[cron] Auto-generating new image...");
-  autoGenerate();
-});
-
 app.listen(PORT, () => {
   console.log(`PixelPay Seller Agent running on http://localhost:${PORT}`);
   console.log(`  payTo: ${payTo}`);
   console.log(`  POST /generate       → $0.01 USDC (x402)`);
+  console.log(`  POST /generate-mock  → free (mock image)`);
   console.log(`  GET  /api/gallery/buy → $0.01 USDC (x402)`);
   console.log(`  GET  /api/gallery     → free`);
   console.log(`  GET  /api/status      → free`);
   console.log(`  GET  /api/nft/:id     → free (NFT metadata)`);
   console.log(`  GET  /api/token-stats → free (PXPAY token stats)`);
-  console.log(`  Cron: auto-generate every 15 minutes`);
+  console.log(`  Mode: manual generation (POST /generate-mock or /generate)`);
 
-  // Generate one on startup
-  console.log("[startup] Generating initial image...");
-  autoGenerate();
+  // Generate a few images on startup so gallery isn't empty
+  console.log("[startup] Generating initial gallery images...");
+  for (let i = 0; i < 3; i++) autoGenerate();
 });
