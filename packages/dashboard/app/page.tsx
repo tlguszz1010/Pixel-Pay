@@ -106,8 +106,8 @@ function StatCard({
         background: "#1a1a1a",
         borderRadius: 12,
         padding: "20px 24px",
-        flex: 1,
-        minWidth: 140,
+        minWidth: 0,
+        overflow: "hidden",
       }}
     >
       <div style={{ fontSize: 13, color: "#888", marginBottom: 6 }}>
@@ -115,7 +115,18 @@ function StatCard({
       </div>
       <div style={{ fontSize: 28, fontWeight: 700 }}>{value}</div>
       {sub && (
-        <div style={{ fontSize: 12, color: "#666", marginTop: 4 }}>{sub}</div>
+        <div
+          style={{
+            fontSize: 12,
+            color: "#666",
+            marginTop: 4,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {sub}
+        </div>
       )}
     </div>
   );
@@ -536,7 +547,13 @@ export default function DashboardPage() {
             </a>
           </div>
 
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+              gap: 12,
+            }}
+          >
             <StatCard
               label="Token Address"
               value={`${tokenStats.address!.slice(0, 6)}...${tokenStats.address!.slice(-4)}`}
