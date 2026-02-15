@@ -520,7 +520,7 @@ export default function DashboardPage() {
               $PXPAY Token
             </h2>
             <a
-              href={`https://nad.fun/token/${tokenStats.address}`}
+              href={`https://nad.fun/tokens/${tokenStats.address}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{

@@ -14,7 +14,7 @@ async function deployToken() {
   const existing = getSetting("pxpay_token_address");
   if (existing) {
     console.log(`PXPAY token already deployed at: ${existing}`);
-    console.log(`nad.fun: https://nad.fun/token/${existing}`);
+    console.log(`nad.fun: https://nad.fun/tokens/${existing}`);
     console.log("Delete 'pxpay_token_address' from settings to redeploy.");
     return;
   }
@@ -123,7 +123,7 @@ async function deployToken() {
   console.log(
     `  Explorer: https://monadscan.com/address/${tokenAddress}`
   );
-  console.log(`  nad.fun: https://nad.fun/token/${tokenAddress}`);
+  console.log(`  nad.fun: https://nad.fun/tokens/${tokenAddress}`);
 
   // Save to DB settings
   setSetting("pxpay_token_address", tokenAddress);
